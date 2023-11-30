@@ -2,7 +2,10 @@
 
 namespace Tots\Auth\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Tots\Auth\Guards\AuthGuard;
+use Tots\Auth\Services\AuthService;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,6 +20,10 @@ class AuthServiceProvider extends ServiceProvider
         if($this->app->runningInConsole()){
             $this->registerMigrations();
         }
+        //
+        $this->app->singleton(AuthService::class, function ($app) {
+            return new AuthService(config('auth'));
+        });
     }
     /**
      * Register migrations library
@@ -27,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $mainPath = database_path('migrations');
         $paths = array_merge([
-            './vendor/tots/auth-laravel/database/migrations'
+            './vendor/tots/auth-lumen/database/migrations'
         ], [$mainPath]);
         $this->loadMigrationsFrom($paths);
     }
@@ -39,5 +46,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Auth::provider('custom', function ($app, array $config) {
+            return new TotsUserProvider();
+        });
+
+        Auth::extend('custom', function ($app, $name, array $config) {
+            return new AuthGuard(Auth::createUserProvider($config['provider']), $app->make('request'), $app->make(AuthService::class));
+        });
     }
 }
