@@ -5,7 +5,7 @@ namespace Tots\Auth\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Tots\Auth\Models\TotsUser;
 
-class MeUpdateController extends \Laravel\Lumen\Routing\Controller
+class MeUpdateController extends \Illuminate\Routing\Controller
 {
 
     public function handle(Request $request)

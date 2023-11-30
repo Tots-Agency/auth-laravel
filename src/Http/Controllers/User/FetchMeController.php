@@ -5,7 +5,7 @@ namespace Tots\Auth\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Tots\Auth\Models\TotsUser;
 
-class FetchMeController extends \Laravel\Lumen\Routing\Controller
+class FetchMeController extends \Illuminate\Routing\Controller
 {
 
     public function handle(Request $request)

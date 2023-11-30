@@ -7,7 +7,7 @@ use Tots\Auth\Models\TotsUser;
 use Illuminate\Support\Facades\Hash;
 use Tots\Auth\Services\AuthService;
 
-class RegisterController extends \Laravel\Lumen\Routing\Controller
+class RegisterController extends \Illuminate\Routing\Controller
 {
 
     /**

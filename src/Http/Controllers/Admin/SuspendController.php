@@ -5,7 +5,7 @@ namespace Tots\Auth\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Tots\Auth\Models\TotsUser;
 
-class SuspendController extends \Laravel\Lumen\Routing\Controller
+class SuspendController extends \Illuminate\Routing\Controller
 {
     public function handle($id)
     {

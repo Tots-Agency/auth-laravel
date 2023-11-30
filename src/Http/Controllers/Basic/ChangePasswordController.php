@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Tots\Auth\Models\TotsUser;
 use Illuminate\Support\Facades\Hash;
 
-class ChangePasswordController extends \Laravel\Lumen\Routing\Controller
+class ChangePasswordController extends \Illuminate\Routing\Controller
 {
     public function handle(Request $request)
     {

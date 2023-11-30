@@ -6,7 +6,7 @@ use Tots\Auth\Models\TotsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UpdateController extends \Laravel\Lumen\Routing\Controller
+class UpdateController extends \Illuminate\Routing\Controller
 {
     public function handle($id, Request $request)
     {

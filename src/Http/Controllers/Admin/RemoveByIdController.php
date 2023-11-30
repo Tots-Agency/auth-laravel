@@ -5,7 +5,7 @@ namespace Tots\Auth\Http\Controllers\Admin;
 use Tots\Auth\Models\TotsUser;
 use Illuminate\Http\Request;
 
-class RemoveByIdController extends \Laravel\Lumen\Routing\Controller
+class RemoveByIdController extends \Illuminate\Routing\Controller
 {
     public function handle($id)
     {

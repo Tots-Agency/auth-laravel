@@ -5,7 +5,7 @@ namespace Tots\Auth\Http\Controllers\Admin;
 use Tots\Auth\Models\TotsUser;
 use Illuminate\Http\Request;
 
-class FetchByIdController extends \Laravel\Lumen\Routing\Controller
+class FetchByIdController extends \Illuminate\Routing\Controller
 {
     public function handle($id, Request $request)
     {

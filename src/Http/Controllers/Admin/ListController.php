@@ -5,7 +5,7 @@ namespace Tots\Auth\Http\Controllers\Admin;
 use Tots\Auth\Models\TotsUser;
 use Illuminate\Http\Request;
 
-class ListController extends \Laravel\Lumen\Routing\Controller
+class ListController extends \Illuminate\Routing\Controller
 {
     public function handle(Request $request)
     {

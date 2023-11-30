@@ -5,7 +5,7 @@ namespace Tots\Auth\Http\Controllers\Basic;
 use Illuminate\Http\Request;
 use Tots\Auth\Models\TotsUser;
 
-class VerifyIfExistEmailController extends \Laravel\Lumen\Routing\Controller
+class VerifyIfExistEmailController extends \Illuminate\Routing\Controller
 {
     public function handle(Request $request)
     {

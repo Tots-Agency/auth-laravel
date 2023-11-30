@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Tots\Auth\Models\TotsUserAttemp;
 use Tots\Auth\Services\AuthService;
 
-class LoginController extends \Laravel\Lumen\Routing\Controller
+class LoginController extends \Illuminate\Routing\Controller
 {
 
     /**
