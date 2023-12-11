@@ -2,6 +2,7 @@
 
 namespace Tots\Auth\Repositories;
 
+use Illuminate\Support\Facades\Hash;
 use Tots\Auth\Models\TotsUser;
 
 /**
@@ -110,5 +111,26 @@ class TotsUserRepository
             throw new \Exception('This user not exist');
         }
         $user->forceDelete();
+    }
+
+    public function create($email, $password, $firstname = '', $lastname = '', $photo = '', $phone = '', $role = 1, $languageId = 1)
+    {
+        $user = new TotsUser();
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
+        $user->email = $email;
+        $user->role = $role;
+        $user->password = Hash::make($password);
+        $user->photo = $photo;
+        $user->phone = $phone;
+        $user->status = TotsUser::STATUS_ACTIVE;
+        $user->language_id = $languageId;
+        return $this->createByObj($user);
+    }
+
+    public function createByObj(TotsUser $user)
+    {
+        $user->save();
+        return $user;
     }
 }
