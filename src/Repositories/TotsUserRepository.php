@@ -104,6 +104,17 @@ class TotsUserRepository
         ]);
     }
 
+    public function updateByData($userId, $data)
+    {
+        // Verify if email exist
+        $user = TotsUser::where('email', $data['email'])->where('id', '!=', $userId)->first();
+        if($user !== null){
+            throw new \Exception('This email is already in use');
+        }
+
+        TotsUser::where('id', $userId)->update($data);
+    }
+
     public function removeById($userId)
     {
         $user = TotsUser::find($userId);
