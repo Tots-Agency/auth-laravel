@@ -10,6 +10,7 @@ use Illuminate\Support\Traits\Macroable;
 use Tots\Auth\Models\TotsUser;
 use Tots\Auth\Providers\AuthServiceProvider;
 use Tots\Auth\Services\AuthService;
+use Tots\Core\Exceptions\TotsException;
 
 class AuthGuard implements Guard
 {
@@ -59,7 +60,7 @@ class AuthGuard implements Guard
             // Search User in DB
             $user = TotsUser::where('id', $payload->uid)->first();
             if($user == null){
-                throw new \Exception('Not exist user.');
+                throw new TotsException('Not exist user.', 'not-exist-user', 400);
             }
 
             $this->setUser($user);

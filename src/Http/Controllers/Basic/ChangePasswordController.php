@@ -5,6 +5,7 @@ namespace Tots\Auth\Http\Controllers\Basic;
 use Illuminate\Http\Request;
 use Tots\Auth\Models\TotsUser;
 use Illuminate\Support\Facades\Hash;
+use Tots\Core\Exceptions\TotsException;
 
 class ChangePasswordController extends \Illuminate\Routing\Controller
 {
@@ -17,7 +18,7 @@ class ChangePasswordController extends \Illuminate\Routing\Controller
         $password = $request->input('password');
         // Verify if password is correct
         if(!Hash::check($oldPassword, $user->password)){
-            throw new \Exception('Password is not correct');
+            throw new TotsException('Password is not correct', 'wrong-password', 400);
         }
         // Save new password
         $user->password = Hash::make($password);

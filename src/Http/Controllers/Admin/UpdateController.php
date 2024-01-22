@@ -5,6 +5,7 @@ namespace Tots\Auth\Http\Controllers\Admin;
 use Tots\Auth\Models\TotsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Tots\Core\Exceptions\TotsException;
 
 class UpdateController extends \Illuminate\Routing\Controller
 {
@@ -12,7 +13,7 @@ class UpdateController extends \Illuminate\Routing\Controller
     {
         $item = TotsUser::where('id', $id)->first();
         if($item === null) {
-            throw new \Exception('Item not exist');
+            throw new TotsException('Item not exist.', 'not-found', 404);
         }
         // Process validations
         /*$this->validate($request, [
@@ -25,7 +26,7 @@ class UpdateController extends \Illuminate\Routing\Controller
         $item->phone = $request->input('phone');
         // Verify if email exist
         if($item->email != $request->input('email') && TotsUser::where('email', $request->input('email'))->count() > 0){
-            throw new \Exception('Email already exist');
+            throw new TotsException('Email already exist', 'email-exist', 400);
         }
         $item->email = $request->input('email');
         // Verify if password is set

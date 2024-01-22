@@ -4,6 +4,7 @@ namespace Tots\Auth\Repositories;
 
 use Illuminate\Support\Facades\Hash;
 use Tots\Auth\Models\TotsUser;
+use Tots\Core\Exceptions\TotsException;
 
 /**
  *
@@ -16,7 +17,7 @@ class TotsUserRepository
         $user = TotsUser::where('phone', $phone)->first();
         // Verify if account exist
         if($user === null){
-            throw new \Exception('This user not exist');
+            throw new TotsException('Item not exist.', 'not-found', 404);
         }
         return $user;
     }
@@ -26,7 +27,7 @@ class TotsUserRepository
         $user = TotsUser::where('email', $email)->where('phone', $phone)->first();
         // Verify if account exist
         if($user === null){
-            throw new \Exception('This user not exist');
+            throw new TotsException('Item not exist.', 'not-found', 404);
         }
         return $user;
     }
@@ -36,7 +37,7 @@ class TotsUserRepository
         $user = TotsUser::where('email', $email)->first();
         // Verify if account exist
         if($user === null){
-            throw new \Exception('This user not exist');
+            throw new TotsException('Item not exist.', 'not-found', 404);
         }
         return $user;
     }
@@ -66,7 +67,7 @@ class TotsUserRepository
         // Verify if email exist
         $user = TotsUser::where('email', $email)->where('id', '!=', $userId)->first();
         if($user !== null){
-            throw new \Exception('This email is already in use');
+            throw new TotsException('This email is already in use', 'email-already-use', 400);
         }
 
         TotsUser::where('id', $userId)->update(['email' => $email]);
@@ -92,7 +93,7 @@ class TotsUserRepository
         // Verify if email exist
         $user = TotsUser::where('email', $email)->where('id', '!=', $userId)->first();
         if($user !== null){
-            throw new \Exception('This email is already in use');
+            throw new TotsException('This email is already in use', 'email-already-use', 400);
         }
 
         TotsUser::where('id', $userId)->update([
@@ -109,7 +110,7 @@ class TotsUserRepository
         // Verify if email exist
         $user = TotsUser::where('email', $data['email'])->where('id', '!=', $userId)->first();
         if($user !== null){
-            throw new \Exception('This email is already in use');
+            throw new TotsException('This email is already in use', 'email-already-use', 400);
         }
 
         TotsUser::where('id', $userId)->update($data);
@@ -119,7 +120,7 @@ class TotsUserRepository
     {
         $user = TotsUser::find($userId);
         if($user === null){
-            throw new \Exception('This user not exist');
+            throw new TotsException('Item not exist.', 'not-found', 404);
         }
         $user->forceDelete();
     }

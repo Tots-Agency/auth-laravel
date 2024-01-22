@@ -7,6 +7,7 @@ use Tots\Auth\Models\TotsUser;
 use Illuminate\Support\Facades\Hash;
 use Tots\Auth\Models\TotsUserAttemp;
 use Tots\Auth\Services\AuthService;
+use Tots\Core\Exceptions\TotsException;
 
 class LoginController extends \Illuminate\Routing\Controller
 {
@@ -56,14 +57,14 @@ class LoginController extends \Illuminate\Routing\Controller
         $user = TotsUser::where('email', $email)->first();
         // Verify if account exist
         if($user === null){
-            throw new \Exception('This account not exist');
+            throw new TotsException('Item not exist.', 'not-found', 404);
         }
         // Verify max attempt
         $attemps = $this->verifyIfMaxAttempt($user) - 1;
         // Verify if password is correct
         if(!Hash::check($password, $user->password)){
             $this->createAttemp($request, $user);
-            throw new \Exception('Incorrect username or password' . ($attemps != null ? ', you have ' . $attemps . ' attempts remaining' : '.'));
+            throw new TotsException('Incorrect username or password' . ($attemps != null ? ', you have ' . $attemps . ' attempts remaining' : '.'), 'wrong-credentials', 400);
         }
 
         return $user;
@@ -82,7 +83,7 @@ class LoginController extends \Illuminate\Routing\Controller
             ->count();
 
         if($attemps >= $this->service->getMaxAttempt()){
-            throw new \Exception('You have entered your data wrong numerous times, try again within 1 hour');
+            throw new TotsException('You have entered your data wrong numerous times, try again within 1 hour', 'wrong-credentials', 400);
         }
 
         return $maxAttempt - $attemps;
