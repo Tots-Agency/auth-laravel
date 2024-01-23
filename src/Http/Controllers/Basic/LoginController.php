@@ -57,7 +57,7 @@ class LoginController extends \Illuminate\Routing\Controller
         $user = TotsUser::where('email', $email)->first();
         // Verify if account exist
         if($user === null){
-            throw new TotsException('Item not exist.', 'not-found', 404);
+            throw new TotsException('Item not exist.', 'not-found-email', 404);
         }
         // Verify max attempt
         $attemps = $this->verifyIfMaxAttempt($user) - 1;
@@ -83,7 +83,7 @@ class LoginController extends \Illuminate\Routing\Controller
             ->count();
 
         if($attemps >= $this->service->getMaxAttempt()){
-            throw new TotsException('You have entered your data wrong numerous times, try again within 1 hour', 'wrong-credentials', 400);
+            throw new TotsException('You have entered your data wrong numerous times, try again within 1 hour', 'max-attemp', 400);
         }
 
         return $maxAttempt - $attemps;
