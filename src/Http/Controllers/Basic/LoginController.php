@@ -83,7 +83,7 @@ class LoginController extends \Illuminate\Routing\Controller
             ->count();
 
         if($attemps >= $this->service->getMaxAttempt()){
-            throw new TotsException('You have entered your data wrong numerous times, try again within 1 hour', 'max-attemp', 400);
+            throw new TotsException('You have entered your data wrong numerous times, try again within 1 hour', 'max-attempt', 400);
         }
 
         return $maxAttempt - $attemps;
