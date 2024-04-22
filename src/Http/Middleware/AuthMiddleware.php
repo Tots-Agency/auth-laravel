@@ -35,7 +35,7 @@ class AuthMiddleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $this->auth->guard('custom')->validate([]);
+        $this->auth->guard('custom')->validate(['access_token' => $request->bearerToken()]);
         
         if ($this->auth->guard('custom')->guest()) {
             return response('Unauthorized.', 401);

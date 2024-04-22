@@ -56,7 +56,7 @@ class AuthGuard implements Guard
     {
         try {
             // Decode Token
-            $payload = $this->service->decodeAuthToken($this->request->bearerToken());
+            $payload = $this->service->decodeAuthToken($credentials['access_token']);
             // Search User in DB
             $user = TotsUser::where('id', $payload->uid)->first();
             if($user == null){
