@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('ip', 100)->nullable(true);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('tots_user');
+            $table->foreign('user_id')->references('id')->on('tots_user')->onDelete('cascade');
         });
     }
 
