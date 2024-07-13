@@ -79,7 +79,7 @@ class LoginController extends \Illuminate\Routing\Controller
 
         // Fetch all attemps in the last 24 hours
         $attemps = TotsUserAttemp::where('user_id', $user->id)
-            ->where('created_at', '>=', (new \DateTime())->sub(new \DateInterval('PT24H')))
+            ->where('created_at', '>=', (new \DateTime())->sub(new \DateInterval('PT1H')))
             ->count();
 
         if($attemps >= $this->service->getMaxAttempt()){
