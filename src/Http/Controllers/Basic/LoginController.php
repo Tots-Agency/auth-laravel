@@ -59,6 +59,10 @@ class LoginController extends \Illuminate\Routing\Controller
         if($user === null){
             throw new TotsException('Item not exist.', 'not-found-email', 404);
         }
+        // Verify if account is suspended
+        if($user->status == TotsUser::STATUS_SUSPENDED){
+            throw new TotsException('Your account is suspended, please contact the administrator.', 'suspended', 400);
+        }
         // Verify max attempt
         $attemps = $this->verifyIfMaxAttempt($user) - 1;
         // Verify if password is correct
