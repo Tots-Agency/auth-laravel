@@ -11,6 +11,10 @@ This library provides all the functionality needed to easily integrate JWT Token
     {
         "type": "git",
         "url": "https://github.com/tots-agency/tots-auth-laravel.git"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/tots-agency/tots-core-laravel.git"
     }
 ]
 ```
@@ -18,7 +22,8 @@ This library provides all the functionality needed to easily integrate JWT Token
 ```json 
 "require": {
     "php": "^8.1",
-    "laravel/framework": "^10.10",
+    "laravel/framework": "^11",
+    "tots/core-laravel": "dev-main",
     "tots/auth-laravel": "dev-main",
     ...
 },
