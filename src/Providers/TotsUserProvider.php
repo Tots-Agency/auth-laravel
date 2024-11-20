@@ -72,5 +72,10 @@ class TotsUserProvider implements UserProvider
 
         return false;
     }
+
+    public function rehashPasswordIfRequired(Authenticatable $user, array $credentials, bool $force = false): void
+    {
+        
+    }
     
 }
