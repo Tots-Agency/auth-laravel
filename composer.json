@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.0",
         "tots/core-laravel": "dev-main",
-        "laravel/framework": "^11",
+        "laravel/framework": "^10|^11",
         "firebase/php-jwt": "^6.9"
     },
     "repositories": [
